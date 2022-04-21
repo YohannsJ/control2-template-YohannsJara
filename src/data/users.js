@@ -13,6 +13,8 @@ function getFakeUser (id) {
         id,
         name: faker.name.findName(),
         email: faker.internet.email(),
-        bitcoinAddress: faker.finance.bitcoinAddress()
+        bitcoinAddress: faker.finance.bitcoinAddress(),
+        token: ""
     }
 }
+
