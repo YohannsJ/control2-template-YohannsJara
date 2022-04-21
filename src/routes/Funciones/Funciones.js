@@ -8,14 +8,14 @@ let user = users.getUsers()
 //los cuales no cambiaran durante la ejecucion del programa
 //si se reinicia la api los usuarios cambiaran de forma aleatoria
 exports.getTokens = (ctx) => {
-    console.log("Get token")
+    //console.log("Gettoken")
     let datos = ctx.request.body
     user.forEach(element => {
         if(element.id == datos.id){
             if (datos.key == KEY && datos.secret == SECRET){
-                console.log("usuario coincide")
+                //console.log("usuario coincide")
                 element.token= Token.getUUIDV4()
-                console.log(element)
+                //console.log(element)
                 ctx.body = {
                     status : 200,
                     token : element.token
@@ -26,8 +26,7 @@ exports.getTokens = (ctx) => {
                 ctx.body = {
                     status : 500,
                     messeage : "KEY o SECRET no coincide, intente de nuevo",
-                    id : datos.id,
-                    token : " "
+
                 }
                 
             }
@@ -40,12 +39,12 @@ exports.getTokens = (ctx) => {
 
 exports.getUser = (ctx) => {
     console.log("getUsers")
-    
+    let encontrado = false
     let token = ctx.request.body.token;
-    console.log(token)
+    //console.log(token)
     user.forEach(element =>{
         if(token == element.token){
-            console.log("encontrado: \n",element)
+            //console.log("encontrado: \n",element)
             ctx.body = {
                 status : 200,
                 id: element.id,
@@ -54,12 +53,16 @@ exports.getUser = (ctx) => {
                 bitcoinAdreess: element.bitcoinAdreess,
                 token : element.token
             }
+            encontrado = true
             return ctx
         }
     })
-    ctx.body = {
-        status : 500,
-        messeage : "Token no coincide, o aún no a sido asignado a un usuario",
+    if(!encontrado){   
+        ctx.body = {
+            status : 500,
+            messeage : "Token no coincide, o aún no a sido asignado a un usuario",
+        }
+        return ctx
     }
     
 }

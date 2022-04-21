@@ -14,7 +14,7 @@ function getFakeUser (id) {
         name: faker.name.findName(),
         email: faker.internet.email(),
         bitcoinAddress: faker.finance.bitcoinAddress(),
-        token: ""
+        token: "" //Genere este atributo extra el cual será modificado cuando se encuentre el token
     }
 }
 
