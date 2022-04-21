@@ -6,7 +6,7 @@ const router = new Router()
 
 router.get('/health', getHealth)
 //Endpoints
-router.post('/token', Funciones.getTokens)
+router.post('/token', Funciones.getTokens) //Asigna un token a un usuario
 
-router.post('/user', Funciones.getUser)
+router.post('/user', Funciones.getUser) //Busca al usuario con el token
 export default router
